@@ -1,0 +1,66 @@
+class AtmMachine():
+    def __init__(self):
+        self.pin =""
+        self.balance= 0
+        self.menu()
+    def menu(self):
+        user_input= (input("""
+            1. press 1 to create  pin
+            2. press 2 to check blance
+            3. press 3 to change pin 
+            4. press 4 to withdraw
+            5. press 0 to exit
+            """
+        ))
+        if user_input == "1":
+            self.create_pin()
+        elif user_input == "2":
+            self.check_balance()
+        elif user_input == "3":
+            self.change_pin()
+        elif user_input == "4":
+            self.withdrawal()
+        elif user_input == "0":
+            pass
+        else:
+            print("Enter the right number")
+    def create_pin(self):
+        user_pin = input("Enter your pin: ")
+        self.pin = user_pin
+        user_balance = int(input("Enter your balance first:"))
+        self.balance = user_balance
+        print("your pin update successsfully")
+        self.menu()
+    def change_pin(self):
+        old_pin = input("Enter your old pin : ")
+        if  old_pin == self.pin:
+            new_pin = input("Enter your new pin :")
+            print("your pin is update sucsessfully")
+            self.pin = new_pin
+            
+        else:
+            print("Wrong pin")
+        self.menu()
+    def check_balance(self) :
+        check_pin= input("Enter your pin :")
+        if check_pin == self.pin :
+            print(f"Your balance is {self.balance} Tk")
+        else:
+            print("Wrong pin")
+        self.menu()
+    def withdrawal(self):
+        amount = int(input("Enter your amount :"))
+        number = input("Enter your number :")
+        if amount <= self.balance :
+            pinw = input("Enter your pin :")
+            if pinw == self.pin :
+                new_amount = self.balance - amount
+                print(f"Withdrawal successfully {amount} Tk, Your new balance is {new_amount}")
+                self.balance = new_amount
+            else: 
+                print("Wrong pin ")
+        else:
+            print("Invaild balance")
+        self.menu()
+    
+atm = AtmMachine()
